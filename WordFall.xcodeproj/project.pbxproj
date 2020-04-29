@@ -35,6 +35,10 @@
 		4E905E652459795D00CAD5B5 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E642459795D00CAD5B5 /* Int.swift */; };
 		4E905E6724597E3D00CAD5B5 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E6624597E3D00CAD5B5 /* GameView.swift */; };
 		4E905E6924597EFB00CAD5B5 /* UIDynamicAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E6824597EFB00CAD5B5 /* UIDynamicAnimator.swift */; };
+		4E905E6B245986DD00CAD5B5 /* GameLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E6A245986DD00CAD5B5 /* GameLoop.swift */; };
+		4E905E6D2459876800CAD5B5 /* GameTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E6C2459876800CAD5B5 /* GameTurn.swift */; };
+		4E905E6F24598C1900CAD5B5 /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E6E24598C1900CAD5B5 /* GameError.swift */; };
+		4EE7BD4A24599B500092A481 /* GameLoopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7BD4924599B500092A481 /* GameLoopTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,10 @@
 		4E905E642459795D00CAD5B5 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		4E905E6624597E3D00CAD5B5 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		4E905E6824597EFB00CAD5B5 /* UIDynamicAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDynamicAnimator.swift; sourceTree = "<group>"; };
+		4E905E6A245986DD00CAD5B5 /* GameLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoop.swift; sourceTree = "<group>"; };
+		4E905E6C2459876800CAD5B5 /* GameTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTurn.swift; sourceTree = "<group>"; };
+		4E905E6E24598C1900CAD5B5 /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
+		4EE7BD4924599B500092A481 /* GameLoopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLoopTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +186,7 @@
 			children = (
 				4E905E5A245970CE00CAD5B5 /* Views */,
 				4E905E332459669E00CAD5B5 /* GameCoordinator.swift */,
-				4E905E5224596E0B00CAD5B5 /* GameViewModel.swift */,
+				4EA8A6F324598EB400030081 /* ViewModel */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -261,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				4E905E5F245974CA00CAD5B5 /* GameViewModelTests.swift */,
+				4EE7BD4924599B500092A481 /* GameLoopTests.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -272,6 +281,17 @@
 				4E905E6824597EFB00CAD5B5 /* UIDynamicAnimator.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4EA8A6F324598EB400030081 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E905E5224596E0B00CAD5B5 /* GameViewModel.swift */,
+				4E905E6A245986DD00CAD5B5 /* GameLoop.swift */,
+				4E905E6C2459876800CAD5B5 /* GameTurn.swift */,
+				4E905E6E24598C1900CAD5B5 /* GameError.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,11 +410,14 @@
 				4E905E0A2459654D00CAD5B5 /* AppDelegate.swift in Sources */,
 				4E905E3C2459681900CAD5B5 /* WordsSource.swift in Sources */,
 				4E905E402459683C00CAD5B5 /* LocalWordsSource.swift in Sources */,
+				4E905E6D2459876800CAD5B5 /* GameTurn.swift in Sources */,
 				4E905E5524596F0600CAD5B5 /* Colors.swift in Sources */,
 				4E905E0C2459654D00CAD5B5 /* SceneDelegate.swift in Sources */,
 				4E905E5724596FA300CAD5B5 /* LocalizedString.swift in Sources */,
+				4E905E6F24598C1900CAD5B5 /* GameError.swift in Sources */,
 				4E905E36245966B600CAD5B5 /* GameViewController.swift in Sources */,
 				4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */,
+				4E905E6B245986DD00CAD5B5 /* GameLoop.swift in Sources */,
 				4E905E302459667400CAD5B5 /* Coordinator.swift in Sources */,
 				4E905E622459780100CAD5B5 /* GameStatisticView.swift in Sources */,
 			);
@@ -405,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E905E442459689F00CAD5B5 /* LocalWordsSourceTests.swift in Sources */,
+				4EE7BD4A24599B500092A481 /* GameLoopTests.swift in Sources */,
 				4E905E60245974CA00CAD5B5 /* GameViewModelTests.swift in Sources */,
 				4E905E212459654E00CAD5B5 /* WordFallTests.swift in Sources */,
 			);

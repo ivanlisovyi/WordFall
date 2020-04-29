@@ -95,7 +95,7 @@ final class GameView: UIView {
     
     // MARK: - Public Methods
     
-    func configure(with turn: Turn) {
+    func configure(with turn: GameTurn) {
         reset()
         
         currentWordLabel.text = turn.current

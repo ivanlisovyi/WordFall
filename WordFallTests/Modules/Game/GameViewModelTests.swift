@@ -16,12 +16,20 @@ final class GameViewModelTests: XCTestCase {
     var mockCoordinator: Coordinator!
     var mockSetting: SettingsProviding!
     
+    var sut: GameViewModel!
+    
     private var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
         mockWordsSource = MockWordsSource()
         mockCoordinator = MockCoordinator()
         mockSetting = Settings()
+        
+        sut = GameViewModel(
+            wordsSource: mockWordsSource,
+            coordinator: mockCoordinator,
+            settings: mockSetting
+        )
         
         cancellables = Set<AnyCancellable>()
         
@@ -33,6 +41,8 @@ final class GameViewModelTests: XCTestCase {
         mockCoordinator = nil
         mockSetting = nil
         
+        sut = nil
+        
         cancellables = nil
         
         super.tearDown()
@@ -40,12 +50,6 @@ final class GameViewModelTests: XCTestCase {
     
     func testInitialState() {
         // When
-        let sut = GameViewModel(
-            wordsSource: mockWordsSource,
-            coordinator: mockCoordinator,
-            settings: mockSetting
-        )
-        
         let lifesValue = CurrentValueSubject<String?, Never>(nil)
         sut.lifesLeftString
             .subscribe(lifesValue)
@@ -66,42 +70,68 @@ final class GameViewModelTests: XCTestCase {
     
     func testPrepareGame_whenLoadWordsSuccesfully_shallChangeStateToReady() {
         // Given
-        let sut = GameViewModel(
-            wordsSource: mockWordsSource,
-            coordinator: mockCoordinator,
-            settings: mockSetting
-        )
-        
+        let expectation = self.expectation(description: #function)
+ 
         // When
-        let actual = CurrentValueSubject<GameViewModel.ViewState, Never>(.loading)
         sut.$state
-            .subscribe(actual)
+            .removeDuplicates()
+            .collect(2)
+            .sink {
+                // Then
+                XCTAssertEqual($0, [GameViewModel.ViewState.loading, GameViewModel.ViewState.ready])
+                expectation.fulfill()
+            }
             .store(in: &cancellables)
 
         sut.prepareGame()
         
-        // Then
-        XCTAssertEqual(actual.value, GameViewModel.ViewState.ready)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testStartGame_whenGameStart_shallChangeStateToStarted() {
         // Given
-        let sut = GameViewModel(
-            wordsSource: mockWordsSource,
-            coordinator: mockCoordinator,
-            settings: mockSetting
-        )
+        let expectation = self.expectation(description: #function)
+
+        // When
+        sut.$state
+            .sink { [weak self] state in
+                switch state {
+                case .ready: self?.sut.startGame()
+                case .started:
+                    expectation.fulfill()
+                case .error:
+                    XCTFail()
+                default: break
+                }
+            }
+            .store(in: &cancellables)
+        
+        sut.prepareGame()
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testStartGame_whenGameStartAndDataIsEmpty_shallChangeStateToError() {
+        // Given
+        let expectation = self.expectation(description: #function)
         
         // When
-        let actual = CurrentValueSubject<GameViewModel.ViewState, Never>(.ready)
         sut.$state
-            .subscribe(actual)
-            .store(in: &cancellables)
+            .dropFirst()
+            .sink { state in
+                // Then
+                switch state {
+                case .error:
+                    expectation.fulfill()
+                default:
+                    XCTFail()
+                }
+        }
+        .store(in: &cancellables)
         
         sut.startGame()
         
-        // Then
-        XCTAssertEqual(actual.value, GameViewModel.ViewState.started)
+        wait(for: [expectation], timeout: 0.1)
     }
 }
 

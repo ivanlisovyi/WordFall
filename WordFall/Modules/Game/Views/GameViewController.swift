@@ -49,6 +49,7 @@ final class GameViewController: UIViewController {
         setupStatisticView()
         setupGameView()
         setupInstructionView()
+        setupErrorAlert()
         
         viewModel.prepareGame()
     }
@@ -69,6 +70,7 @@ fileprivate extension GameViewController {
         
         viewModel.$state
             .map { $0 == .loading }
+            .removeDuplicates()
             .sink { [weak self] isLoading in
                 if isLoading {
                     self?.activityIndicator.startAnimating()
@@ -116,9 +118,8 @@ fileprivate extension GameViewController {
             .assign(to: \.isHidden, on: gameView)
             .store(in: &cancellables)
         
-        viewModel.$currentTurn
+        viewModel.currentTurn
             .removeDuplicates()
-            .compactMap { $0 }
             .sink(receiveValue: gameView.configure)
             .store(in: &cancellables)
         
@@ -144,5 +145,54 @@ fileprivate extension GameViewController {
         instructionsView.didHandleActionButtonTap
             .sink(receiveValue: viewModel.startGame)
             .store(in: &cancellables)
+    }
+    
+    func setupErrorAlert() {
+        viewModel.$state
+            .map { state -> Error? in
+                switch state {
+                case let .error(error): return error
+                default: return nil
+                }
+            }
+            .compactMap { $0 }
+            .sink { [weak self] error in
+                self?.showErrorAlert(with: error as NSError, action: { _ in
+                    self?.viewModel.prepareGame()
+                })
+            }.store(in: &cancellables)
+    }
+}
+
+// MARK: - Error Alert Controller
+
+private extension GameViewController {
+    typealias AlertAction = (UIAlertAction) -> Void
+    
+    func showErrorAlert(with error: NSError, action: AlertAction? = nil) {
+        let message: String? = {
+            let message = [
+                error.localizedFailureReason,
+                error.localizedRecoverySuggestion
+                ]
+                .compactMap({ $0 })
+                .joined(separator: "\n")
+            return message.isEmpty ? nil : message
+        }()
+        
+        let action = UIAlertAction(
+            title: NSLocalizedString("general.action.ok", comment: ""),
+            style: .destructive,
+            handler: action
+        )
+        
+        let alertController = UIAlertController(
+            title: error.localizedDescription,
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

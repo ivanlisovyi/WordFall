@@ -9,28 +9,32 @@
 import Foundation
 import Combine
 
-struct Turn: Equatable {
-    let current: String
-    let falling: String
-}
-
 final class GameViewModel: ObservableObject {
     enum ViewState: Equatable {
         case loading
         case ready
         case started
-        case finished(Bool)
+        case finished(isWin: Bool)
+        case error(GameError)
     }
     
-    lazy var lifesLeftString: AnyPublisher<String?, Never> = {
-        $lifesLeft.map { $0.map { "♥︎" } }.eraseToAnyPublisher()
-    }()
+    var lifesLeftString: AnyPublisher<String?, Never> {
+        gameLoop.$lifesLeft
+            .map { $0.map { "♥︎" } }
+            .eraseToAnyPublisher()
+    }
     
-    lazy var pointsEarnedString: AnyPublisher<String?, Never> = {
-        $pointsEarned.map {"\("game.score".localized()) \($0)"}.eraseToAnyPublisher()
-    }()
+    var pointsEarnedString: AnyPublisher<String?, Never> {
+        gameLoop.$pointsEarned
+            .map {"\("game.score".localized()) \($0)"}
+            .eraseToAnyPublisher()
+    }
     
-    @Published private(set) var currentTurn: Turn?
+    var currentTurn: AnyPublisher<GameTurn, Never> {
+        gameLoop.$turn.compactMap { $0 }
+            .eraseToAnyPublisher()
+    }
+    
     @Published private(set) var state: ViewState = .loading
     @Published private(set) var gameSpeed: Float
 
@@ -38,10 +42,9 @@ final class GameViewModel: ObservableObject {
     let coordinator: Coordinator
     let settings: SettingsProviding
     
-    // MARK: - Private Properties
+    private let gameLoop: GameLoop
     
-    @Published private var lifesLeft: Int
-    @Published private var pointsEarned = 0
+    // MARK: - Private Properties
     
     private var words: [Word] = []
     private var cancellables = Set<AnyCancellable>()
@@ -53,14 +56,23 @@ final class GameViewModel: ObservableObject {
         self.coordinator = coordinator
         self.settings = settings
         
-        self.lifesLeft = settings.lifesPerGame
         self.gameSpeed = settings.gameSpeed
+        self.gameLoop = GameLoop(settings: settings)
+        self.gameLoop.$isWin
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.state = .finished(isWin: $0)
+            }.store(in: &cancellables)
     }
     
     // MARK: - Public Methods
     
     func prepareGame() {
+        state = .loading
+        
         wordsSource.loadWords()
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] in
                 if let self = self {
                     self.words = $0
@@ -73,20 +85,15 @@ final class GameViewModel: ObservableObject {
     }
     
     func startGame() {
-        resetGame()
+        guard gameLoop.start(with: words) else {
+            state = .error(.emptyData)
+            return
+        }
         
         state = .started
     }
     
     func validate(_ input: String?) {
-        
-    }
-}
-
-// MARK: - Private Methods
-
-fileprivate extension GameViewModel {
-    private func resetGame() {
-        
+        gameLoop.validate(input)
     }
 }
