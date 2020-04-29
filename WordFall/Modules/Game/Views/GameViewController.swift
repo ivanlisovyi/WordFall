@@ -15,6 +15,7 @@ final class GameViewController: UIViewController {
     // MARK: - Private Properties
     
     private let statisticView = GameStatisticView()
+    private let gameView = GameView()
     private let instructionsView = GameInstructionsView()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -46,14 +47,17 @@ final class GameViewController: UIViewController {
         
         setupAcitivityIndicator()
         setupStatisticView()
+        setupGameView()
         setupInstructionView()
         
         viewModel.prepareGame()
     }
+}
 
-    // MARK: - Setup
-    
-    private func setupView() {
+// MARK: - Private Methods
+
+fileprivate extension GameViewController {
+    func setupView() {
         view.backgroundColor = Colors.background
     }
     
@@ -92,6 +96,37 @@ final class GameViewController: UIViewController {
         ])
     }
     
+    func setupGameView() {
+        view.addSubview(gameView)
+        
+        NSLayoutConstraint.activate([
+            gameView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            gameView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            gameView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: statisticView.bounds.height),
+            gameView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
+        ])
+        
+        gameView.didConfirmTranslation
+            .throttle(for: 0.3, scheduler: DispatchQueue.main, latest: false)
+            .sink(receiveValue: viewModel.validate)
+            .store(in: &cancellables)
+        
+        viewModel.$state
+            .map { $0 != .started }
+            .assign(to: \.isHidden, on: gameView)
+            .store(in: &cancellables)
+        
+        viewModel.$currentTurn
+            .removeDuplicates()
+            .compactMap { $0 }
+            .sink(receiveValue: gameView.configure)
+            .store(in: &cancellables)
+        
+        viewModel.$gameSpeed
+            .sink(receiveValue: gameView.setGameSpeed)
+            .store(in: &cancellables)
+    }
+    
     func setupInstructionView() {
         view.addSubview(instructionsView)
         
@@ -102,8 +137,7 @@ final class GameViewController: UIViewController {
             instructionsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
         ])
         
-        viewModel
-            .$state
+        viewModel.$state
             .sink(receiveValue: instructionsView.configure)
             .store(in: &cancellables)
         

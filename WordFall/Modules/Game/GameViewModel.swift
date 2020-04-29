@@ -9,6 +9,11 @@
 import Foundation
 import Combine
 
+struct Turn: Equatable {
+    let current: String
+    let falling: String
+}
+
 final class GameViewModel: ObservableObject {
     enum ViewState: Equatable {
         case loading
@@ -25,6 +30,7 @@ final class GameViewModel: ObservableObject {
         $pointsEarned.map {"\("game.score".localized()) \($0)"}.eraseToAnyPublisher()
     }()
     
+    @Published private(set) var currentTurn: Turn?
     @Published private(set) var state: ViewState = .loading
     @Published private(set) var gameSpeed: Float
 
@@ -67,6 +73,20 @@ final class GameViewModel: ObservableObject {
     }
     
     func startGame() {
+        resetGame()
+        
         state = .started
+    }
+    
+    func validate(_ input: String?) {
+        
+    }
+}
+
+// MARK: - Private Methods
+
+fileprivate extension GameViewModel {
+    private func resetGame() {
+        
     }
 }

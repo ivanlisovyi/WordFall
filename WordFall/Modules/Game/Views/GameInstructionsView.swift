@@ -48,7 +48,7 @@ final class GameInstructionsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View Setup
+    // MARK: - Setup
     
     private func setupView() {
         backgroundColor = .clear
