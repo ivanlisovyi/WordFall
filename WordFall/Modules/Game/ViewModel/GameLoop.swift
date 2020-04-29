@@ -39,6 +39,15 @@ final class GameLoop: ObservableObject {
             .store(in: &cancellables)
     }
     
+    /// Starts the game loop if given words array is not empty and return `true`. Return `false` otherwise.
+    ///
+    /// 1. Resets the game values to their defaults.
+    /// 2. Take a certain number of words from `words` array.
+    ///     The exact number is dictated by `settings`.
+    /// 3. Starts a game by taking the very first word from the result of previous step and pushes
+    ///     it through the game loop.
+    ///
+    /// - Parameter words: The words to pick from.
     func start(with words: [Word]) -> Bool {
         if words.isEmpty {
             return false
@@ -55,6 +64,7 @@ final class GameLoop: ObservableObject {
         return true 
     }
     
+    /// Notifies the game loop that it needs to validate user input.
     func validate(_ input: String?) {
         gameLoop.send(.validate(input))
     }

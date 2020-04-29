@@ -9,6 +9,9 @@
 import Foundation
 
 extension Int {
+    /// Returns a string value by calling a supplied transform block **N** number of times
+    /// and concateneting it in a single string. **N** is equal `self`.
+    /// - Parameter transform: The tranform closure to be run on every iteration.
     func map(_ transform: () -> String) -> String {
         var result = ""
         for _ in 0..<self {

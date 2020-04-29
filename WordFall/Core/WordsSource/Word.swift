@@ -8,13 +8,17 @@
 
 import Foundation
 
+/// A struct that represent a single word in a word source.
 struct Word: Decodable {
     enum CodingKeys: String, CodingKey {
         case text = "text_eng"
         case translation = "text_spa"
     }
     
+    /// The original text.
     let text: String
+    
+    /// The original text translation.
     let translation: String
 }
 

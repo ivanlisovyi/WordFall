@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIDynamicAnimator {
+    /// Adds all the behaviors from a given array.
+    /// - Parameter behaviours: The behaviors to add.
     func addBehaviors(_ behaviors: [UIDynamicBehavior]) {
         behaviors.forEach { addBehavior($0) }
     }

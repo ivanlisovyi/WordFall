@@ -9,12 +9,18 @@
 import Foundation
 import Combine
 
+/// A class the provides a way to get an array of `Words` from a given file.
 struct LocalWordsSource: WordsSource {
     let fileName: String
     let bundle: Bundle
     
     let decoder: JSONDecoder
     
+    /// Create a local words source with a given parameters.
+    /// - Parameters:
+    ///     - fileName: The name of the source file. Defaults to `words.json`.
+    ///     - bundle: The file's bundle. Defaults to `.main`.
+    ///     - decoder: The data decoder. Defaults to `JSONDecoder()`.
     init(
         fileName: String = "words.json",
         bundle: Bundle = .main,
