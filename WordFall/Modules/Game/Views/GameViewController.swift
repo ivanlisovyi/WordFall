@@ -14,6 +14,7 @@ final class GameViewController: UIViewController {
     
     // MARK: - Private Properties
     
+    private let statisticView = GameStatisticView()
     private let instructionsView = GameInstructionsView()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -44,6 +45,7 @@ final class GameViewController: UIViewController {
         setupView()
         
         setupAcitivityIndicator()
+        setupStatisticView()
         setupInstructionView()
         
         viewModel.prepareGame()
@@ -70,6 +72,24 @@ final class GameViewController: UIViewController {
                     self?.activityIndicator.stopAnimating()
                 }
         }.store(in: &cancellables)
+    }
+    
+    func setupStatisticView() {
+        view.addSubview(statisticView)
+        
+        viewModel.lifesLeftString
+            .sink(receiveValue: statisticView.setLifesCountText)
+            .store(in: &cancellables)
+        
+        viewModel.pointsEarnedString
+            .sink(receiveValue: statisticView.setScoreText)
+            .store(in: &cancellables)
+        
+        NSLayoutConstraint.activate([
+            statisticView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            statisticView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            statisticView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor)
+        ])
     }
     
     func setupInstructionView() {

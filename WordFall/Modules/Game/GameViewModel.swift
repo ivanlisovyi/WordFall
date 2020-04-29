@@ -17,13 +17,25 @@ final class GameViewModel: ObservableObject {
         case finished(Bool)
     }
     
+    lazy var lifesLeftString: AnyPublisher<String?, Never> = {
+        $lifesLeft.map { $0.map { "♥︎" } }.eraseToAnyPublisher()
+    }()
+    
+    lazy var pointsEarnedString: AnyPublisher<String?, Never> = {
+        $pointsEarned.map {"\("game.score".localized()) \($0)"}.eraseToAnyPublisher()
+    }()
+    
     @Published private(set) var state: ViewState = .loading
+    @Published private(set) var gameSpeed: Float
 
     let wordsSource: WordsSource
     let coordinator: Coordinator
     let settings: SettingsProviding
     
     // MARK: - Private Properties
+    
+    @Published private var lifesLeft: Int
+    @Published private var pointsEarned = 0
     
     private var words: [Word] = []
     private var cancellables = Set<AnyCancellable>()
@@ -34,6 +46,9 @@ final class GameViewModel: ObservableObject {
         self.wordsSource = wordsSource
         self.coordinator = coordinator
         self.settings = settings
+        
+        self.lifesLeft = settings.lifesPerGame
+        self.gameSpeed = settings.gameSpeed
     }
     
     // MARK: - Public Methods

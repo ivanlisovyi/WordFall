@@ -31,6 +31,8 @@
 		4E905E5924596FB600CAD5B5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E5824596FB600CAD5B5 /* Localizable.strings */; };
 		4E905E5C245970E900CAD5B5 /* GameInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5B245970E900CAD5B5 /* GameInstructionsView.swift */; };
 		4E905E60245974CA00CAD5B5 /* GameViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5F245974CA00CAD5B5 /* GameViewModelTests.swift */; };
+		4E905E622459780100CAD5B5 /* GameStatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E612459780100CAD5B5 /* GameStatisticView.swift */; };
+		4E905E652459795D00CAD5B5 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E642459795D00CAD5B5 /* Int.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		4E905E5824596FB600CAD5B5 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		4E905E5B245970E900CAD5B5 /* GameInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsView.swift; sourceTree = "<group>"; };
 		4E905E5F245974CA00CAD5B5 /* GameViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTests.swift; sourceTree = "<group>"; };
+		4E905E612459780100CAD5B5 /* GameStatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatisticView.swift; sourceTree = "<group>"; };
+		4E905E642459795D00CAD5B5 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 			children = (
 				4E905E092459654D00CAD5B5 /* AppDelegate.swift */,
 				4E905E0B2459654D00CAD5B5 /* SceneDelegate.swift */,
+				4E905E632459795300CAD5B5 /* Extensions */,
 				4E905E37245967DB00CAD5B5 /* Core */,
 				4E905E2D2459664500CAD5B5 /* Modules */,
 				4E905E2B2459663000CAD5B5 /* Assets */,
@@ -234,6 +239,7 @@
 			children = (
 				4E905E35245966B600CAD5B5 /* GameViewController.swift */,
 				4E905E5B245970E900CAD5B5 /* GameInstructionsView.swift */,
+				4E905E612459780100CAD5B5 /* GameStatisticView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +258,14 @@
 				4E905E5F245974CA00CAD5B5 /* GameViewModelTests.swift */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		4E905E632459795300CAD5B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E905E642459795D00CAD5B5 /* Int.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +378,7 @@
 				4E905E3A245967FF00CAD5B5 /* Word.swift in Sources */,
 				4E905E322459668B00CAD5B5 /* AppCoordinator.swift in Sources */,
 				4E905E3E2459682E00CAD5B5 /* WordsSourceError.swift in Sources */,
+				4E905E652459795D00CAD5B5 /* Int.swift in Sources */,
 				4E905E0A2459654D00CAD5B5 /* AppDelegate.swift in Sources */,
 				4E905E3C2459681900CAD5B5 /* WordsSource.swift in Sources */,
 				4E905E402459683C00CAD5B5 /* LocalWordsSource.swift in Sources */,
@@ -373,6 +388,7 @@
 				4E905E36245966B600CAD5B5 /* GameViewController.swift in Sources */,
 				4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */,
 				4E905E302459667400CAD5B5 /* Coordinator.swift in Sources */,
+				4E905E622459780100CAD5B5 /* GameStatisticView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

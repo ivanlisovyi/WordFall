@@ -46,8 +46,22 @@ final class GameViewModelTests: XCTestCase {
             settings: mockSetting
         )
         
+        let lifesValue = CurrentValueSubject<String?, Never>(nil)
+        sut.lifesLeftString
+            .subscribe(lifesValue)
+            .store(in: &cancellables)
+        
+        let pointsValue = CurrentValueSubject<String?, Never>(nil)
+        sut.pointsEarnedString
+            .subscribe(pointsValue)
+            .store(in: &cancellables)
+        
         // Then
         XCTAssertEqual(sut.state, GameViewModel.ViewState.loading)
+        XCTAssertEqual(sut.gameSpeed, mockSetting.gameSpeed, accuracy: 0.0001)
+        
+        XCTAssertEqual(lifesValue.value, "♥︎♥︎")
+        XCTAssertEqual(pointsValue.value, "\("game.score".localized()) 0")
     }
     
     func testPrepareGame_whenLoadWordsSuccesfully_shallChangeStateToReady() {
