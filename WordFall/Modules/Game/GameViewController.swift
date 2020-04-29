@@ -9,9 +9,13 @@
 import UIKit
 
 final class GameViewController: UIViewController {
+    let viewModel: GameViewModel
+    
     // MARK: - Init & Lifecycle
     
-    init() {
+    init(viewModel: GameViewModel) {
+        self.viewModel = viewModel
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -21,5 +25,13 @@ final class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
+    }
+    
+    // MARK: - Setup
+    
+    private func setupView() {
+        view.backgroundColor = Colors.background
     }
 }

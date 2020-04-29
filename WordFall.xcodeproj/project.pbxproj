@@ -25,6 +25,10 @@
 		4E905E4C24596B7900CAD5B5 /* empty_words.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E4B24596B7900CAD5B5 /* empty_words.json */; };
 		4E905E4E24596D7300CAD5B5 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E4D24596D7300CAD5B5 /* words.json */; };
 		4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5024596DB000CAD5B5 /* Settings.swift */; };
+		4E905E5324596E0B00CAD5B5 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5224596E0B00CAD5B5 /* GameViewModel.swift */; };
+		4E905E5524596F0600CAD5B5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5424596F0600CAD5B5 /* Colors.swift */; };
+		4E905E5724596FA300CAD5B5 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5624596FA300CAD5B5 /* LocalizedString.swift */; };
+		4E905E5924596FB600CAD5B5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E5824596FB600CAD5B5 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,10 @@
 		4E905E4B24596B7900CAD5B5 /* empty_words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = empty_words.json; sourceTree = "<group>"; };
 		4E905E4D24596D7300CAD5B5 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
 		4E905E5024596DB000CAD5B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		4E905E5224596E0B00CAD5B5 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		4E905E5424596F0600CAD5B5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4E905E5624596FA300CAD5B5 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		4E905E5824596FB600CAD5B5 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,7 @@
 				4E905E4D24596D7300CAD5B5 /* words.json */,
 				4E905E122459654D00CAD5B5 /* Assets.xcassets */,
 				4E905E142459654D00CAD5B5 /* LaunchScreen.storyboard */,
+				4E905E5824596FB600CAD5B5 /* Localizable.strings */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -155,6 +164,7 @@
 			children = (
 				4E905E332459669E00CAD5B5 /* GameCoordinator.swift */,
 				4E905E35245966B600CAD5B5 /* GameViewController.swift */,
+				4E905E5224596E0B00CAD5B5 /* GameViewModel.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -164,6 +174,8 @@
 			children = (
 				4E905E4F24596D9F00CAD5B5 /* Settings */,
 				4E905E38245967EA00CAD5B5 /* WordsSource */,
+				4E905E5424596F0600CAD5B5 /* Colors.swift */,
+				4E905E5624596FA300CAD5B5 /* LocalizedString.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -294,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E905E4E24596D7300CAD5B5 /* words.json in Resources */,
+				4E905E5924596FB600CAD5B5 /* Localizable.strings in Resources */,
 				4E905E162459654D00CAD5B5 /* LaunchScreen.storyboard in Resources */,
 				4E905E132459654D00CAD5B5 /* Assets.xcassets in Resources */,
 			);
@@ -315,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E905E5324596E0B00CAD5B5 /* GameViewModel.swift in Sources */,
 				4E905E342459669E00CAD5B5 /* GameCoordinator.swift in Sources */,
 				4E905E3A245967FF00CAD5B5 /* Word.swift in Sources */,
 				4E905E322459668B00CAD5B5 /* AppCoordinator.swift in Sources */,
@@ -322,7 +336,9 @@
 				4E905E0A2459654D00CAD5B5 /* AppDelegate.swift in Sources */,
 				4E905E3C2459681900CAD5B5 /* WordsSource.swift in Sources */,
 				4E905E402459683C00CAD5B5 /* LocalWordsSource.swift in Sources */,
+				4E905E5524596F0600CAD5B5 /* Colors.swift in Sources */,
 				4E905E0C2459654D00CAD5B5 /* SceneDelegate.swift in Sources */,
+				4E905E5724596FA300CAD5B5 /* LocalizedString.swift in Sources */,
 				4E905E36245966B600CAD5B5 /* GameViewController.swift in Sources */,
 				4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */,
 				4E905E302459667400CAD5B5 /* Coordinator.swift in Sources */,

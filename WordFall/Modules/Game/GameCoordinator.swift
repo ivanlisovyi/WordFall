@@ -16,7 +16,11 @@ final class GameCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = GameViewController()
+        let localWordsSource = LocalWordsSource()
+        let settings = Settings()
+        
+        let viewModel = GameViewModel(wordsSource: localWordsSource, coordinator: self, settings: settings)
+        let viewController = GameViewController(viewModel: viewModel)
         navigationController.pushViewController(viewController, animated: false)
     }
 }

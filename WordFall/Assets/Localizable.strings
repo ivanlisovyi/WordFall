@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  WordFall
+
+  Created by Ivan Lisovyi on 29.04.20.
+  Copyright © 2020 Ivan Lisovyi. All rights reserved.
+*/
+
+"game.name" = "Word Fall";
+
+"game.play.instructions" = "1. You  will see a word in a ceraint language in a middle of the screen.\n 2. While this word is displayed, a translation in another language will fall down on the screen.\n 3. If translation is correct tap on the falling word.";
+"game.reset.instructions" = "Tap on Reset button to play again.";
+
+"game.start.button.title" = "Start";
+"game.reset.button.title" = "Reset";
+
+"game.won.text" = "You won!";
+"game.lost.text" = "You lost...";
+
+"game.score" = "Score:";
