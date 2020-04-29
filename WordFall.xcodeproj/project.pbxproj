@@ -23,6 +23,8 @@
 		4E905E442459689F00CAD5B5 /* LocalWordsSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E432459689F00CAD5B5 /* LocalWordsSourceTests.swift */; };
 		4E905E4A24596B6E00CAD5B5 /* tests_words.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E4924596B6E00CAD5B5 /* tests_words.json */; };
 		4E905E4C24596B7900CAD5B5 /* empty_words.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E4B24596B7900CAD5B5 /* empty_words.json */; };
+		4E905E4E24596D7300CAD5B5 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E905E4D24596D7300CAD5B5 /* words.json */; };
+		4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E905E5024596DB000CAD5B5 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		4E905E432459689F00CAD5B5 /* LocalWordsSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWordsSourceTests.swift; sourceTree = "<group>"; };
 		4E905E4924596B6E00CAD5B5 /* tests_words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tests_words.json; sourceTree = "<group>"; };
 		4E905E4B24596B7900CAD5B5 /* empty_words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = empty_words.json; sourceTree = "<group>"; };
+		4E905E4D24596D7300CAD5B5 /* words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
+		4E905E5024596DB000CAD5B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		4E905E2B2459663000CAD5B5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4E905E4D24596D7300CAD5B5 /* words.json */,
 				4E905E122459654D00CAD5B5 /* Assets.xcassets */,
 				4E905E142459654D00CAD5B5 /* LaunchScreen.storyboard */,
 			);
@@ -157,6 +162,7 @@
 		4E905E37245967DB00CAD5B5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4E905E4F24596D9F00CAD5B5 /* Settings */,
 				4E905E38245967EA00CAD5B5 /* WordsSource */,
 			);
 			path = Core;
@@ -196,6 +202,14 @@
 				4E905E4B24596B7900CAD5B5 /* empty_words.json */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		4E905E4F24596D9F00CAD5B5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4E905E5024596DB000CAD5B5 /* Settings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E905E4E24596D7300CAD5B5 /* words.json in Resources */,
 				4E905E162459654D00CAD5B5 /* LaunchScreen.storyboard in Resources */,
 				4E905E132459654D00CAD5B5 /* Assets.xcassets in Resources */,
 			);
@@ -309,6 +324,7 @@
 				4E905E402459683C00CAD5B5 /* LocalWordsSource.swift in Sources */,
 				4E905E0C2459654D00CAD5B5 /* SceneDelegate.swift in Sources */,
 				4E905E36245966B600CAD5B5 /* GameViewController.swift in Sources */,
+				4E905E5124596DB000CAD5B5 /* Settings.swift in Sources */,
 				4E905E302459667400CAD5B5 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
